@@ -1,0 +1,6 @@
+/target
+Cargo.lock
+.idea
+doc
+*.svg
+benches/*/target

@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+UNAME="$(uname -s)"
+case "${UNAME}" in
+    Linux*)     ;;
+    Darwin*)    echo "Mac is not supported: https://youtu.be/7CIGb1Ti06k" && exit 1;;
+    CYGWIN*)    ;;
+    MINGW*)     ;;
+    *)          echo "Unsupported OS type." && exit 1
+esac
+
+if [[ "$EUID" -ne 0 ]]; then
+  echo "====> Zor needs to be run as root. Exiting..."
+  exit 1
+fi
+
+echo "====> Getting ready for the benchmarking..."
+
+sync && echo 3 | tee /proc/sys/vm/drop_caches || true
+
+# I think you have at least one physical core if you've come to this point, right, RIGHT, hehe...
+if grep pstate /sys/devices/system/cpu/cpu0/cpufreq/scaling_driver; then
+  echo 1 | sudo tee /sys/devices/system/cpu/intel_pstate/no_turbo || true
+else
+  if grep acpi /sys/devices/system/clocksource/clocksource0/available_clocksource; then
+    echo 0 | sudo tee /sys/devices/system/cpu/cpufreq/boost || true
+  fi
+fi
+
+echo 1 | sudo tee /proc/sys/vm/compact_memory || true
+
+sync && echo 3 | tee /proc/sys/vm/drop_caches || true
+
+echo "====> Now you can start benchmarks."
+echo "====> If cargo bench is compiling rerun 'zor' after the compilation."

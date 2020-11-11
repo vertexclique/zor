@@ -3,10 +3,10 @@
 UNAME="$(uname -s)"
 case "${UNAME}" in
     Linux*)     ;;
-    Darwin*)    echo "Mac is not supported: https://youtu.be/7CIGb1Ti06k" && exit 1;;
+    Darwin*)    echo "====> Mac is not supported: https://youtu.be/7CIGb1Ti06k" && exit 1;;
     CYGWIN*)    ;;
     MINGW*)     ;;
-    *)          echo "Unsupported OS type." && exit 1
+    *)          echo "====> Unsupported OS type." && exit 1
 esac
 
 if [[ "$EUID" -ne 0 ]]; then

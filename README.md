@@ -1,7 +1,7 @@
 # Zor
 
 Benchmarking is difficult, "zor" creates a baseline for that.
-Zor is for properly running Rust benchmarks. And it is a benchmark utility for cargo benchmarks.
+Zor is a utility tool for benchmarking in Rust and it properly allows to run them.
 
 Clone the repo and then:
 

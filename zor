@@ -1,9 +1,15 @@
 #!/usr/bin/env bash
 
+##################################################################################
+### ZOR: Means "hard". Since benchmarking is "hard".
+### This tool disables and cleans up the system state in a way that
+### all benchmarks are ran in equal way on the same machine.
+##################################################################################
+
 UNAME="$(uname -s)"
 case "${UNAME}" in
     Linux*)     ;;
-    Darwin*)    echo "====> Mac is not supported: https://youtu.be/7CIGb1Ti06k" && exit 1;;
+    Darwin*)    echo "====> Mac is not supported." && exit 1;;
     CYGWIN*)    ;;
     MINGW*)     ;;
     *)          echo "====> Unsupported OS type." && exit 1
